@@ -19,12 +19,12 @@
 
 如下: 
 
-Scala:
+[Scala实现](https://github.com/R4mble/JavaInScalaWay/blob/master/src/main/java/buy_coffee/scala_way/Cafe.scala)
 ```scala
 charges.groupBy(_.cc).values.map(_.reduce(_ combine _)).toList
 ```
 
-Java:
+[Java实现](https://github.com/R4mble/JavaInScalaWay/blob/master/src/main/java/buy_coffee/java_way/Cafe.java)
 ```java
 charges.stream().collect(Collectors.groupingBy(c -> c.creditCard.name))
         .values().stream().map(c -> c.stream().reduce(Charge::combine)
