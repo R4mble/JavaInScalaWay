@@ -17,7 +17,12 @@
 - Scala可以有多返回值,而Java不行. 那就把多返回值合成一个对象.
 - Java的弱鸡函数式也可以跟Scala相提并论吗?  可以的.
 
-当我把这段代码拼凑出来的时候,忍不住大笑.
+如下: 
+
+```scala
+charges.groupBy(_.cc).values.map(_.reduce(_ combine _)).toList
+```
+
 ```java
 charges.stream().collect(Collectors.groupingBy(c -> c.creditCard.name)).values().stream()
                  .map(c -> c.stream().reduce(Charge::combine).orElse(null)).collect(Collectors.toList());
