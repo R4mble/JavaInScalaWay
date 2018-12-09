@@ -20,6 +20,7 @@ public class Cafe {
         return new Accounts(coffees, new Charge(cc, coffees.stream().mapToDouble(c -> c.price).sum()));
     }
 
+    //a hard way to complete divide, reduce and collect
     public List<Charge> coalesce(List<Charge> charges) {
          return charges.stream().collect(Collectors.groupingBy(c -> c.creditCard.name)).values().stream()
                  .map(c -> c.stream().reduce(Charge::combine).orElse(null)).collect(Collectors.toList());
@@ -30,8 +31,11 @@ public class Cafe {
         Account cofe1 = c.buyCoffee(new CreditCard("wyl"));
         Accounts cofe2 = c.buyCoffee(new CreditCard("wyl"), 2);
         Accounts cofe3 = c.buyCoffee(new CreditCard("ramble"), 5);
+        Accounts cofe4 = c.buyCoffee(new CreditCard("wang"), 31);
+        Accounts cofe5 = c.buyCoffee(new CreditCard("lisi"), 134);
 
-        List<Charge> charges = c.coalesce(Arrays.asList(cofe1.charge, cofe2.charge, cofe3.charge));
+        List<Charge> charges = c.coalesce(Arrays.asList(cofe1.charge, cofe2.charge,
+                cofe3.charge, cofe4.charge, cofe5.charge));
 
         System.out.println(cofe1);
         System.out.println(cofe2);
