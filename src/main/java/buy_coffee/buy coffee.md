@@ -19,12 +19,15 @@
 
 如下: 
 
+Scala:
 ```scala
 charges.groupBy(_.cc).values.map(_.reduce(_ combine _)).toList
 ```
 
+Java:
 ```java
-charges.stream().collect(Collectors.groupingBy(c -> c.creditCard.name)).values().stream()
-                 .map(c -> c.stream().reduce(Charge::combine).orElse(null)).collect(Collectors.toList());
+charges.stream().collect(Collectors.groupingBy(c -> c.creditCard.name))
+        .values().stream().map(c -> c.stream().reduce(Charge::combine)
+        .orElse(null)).collect(Collectors.toList());
 ```
 有点遗憾老是stream和collection转来转去的,不过也很cooooool了.
