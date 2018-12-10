@@ -32,7 +32,12 @@ object Fac {
   }
 
   def isSorted[A] (as: Array[A], ordered: (A, A) => Boolean): Boolean = {
-
+    @annotation.tailrec
+    def go(n: Int): Boolean =
+      if (n >= as.length - 1) true
+      else if (ordered(as(n), as(n + 1))) false
+      else go(n + 1)
+    go(0)
   }
 
   def formatResult(name: String, n: Int, f: Int => Int) = {
@@ -46,5 +51,8 @@ object Fac {
 
     println(formatResult("factorial", 7, factorial))
     println(formatResult("fib", 7, fib))
+
+    println(findFirst(Array(1,23,4), (a: Int) => a > 4))
+    println(isSorted(Array(100,83,45), (a: Int, b: Int) => a < b))
   }
 }
