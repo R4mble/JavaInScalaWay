@@ -55,6 +55,35 @@ object List {
     case Cons(h, t) => Cons(h, init(t))
   }
 
+  def foldRight[A,B] (as: List[A], z: B) (f: (A, B) => B): B =
+    as match {
+      case Nil => z
+      case Cons(x, xs) => f(x, foldRight(xs, z) (f))
+    }
+
+  @annotation.tailrec
+  def foldLeft[A,B] (as: List[A], z: B)(f: (B, A) => B): B =
+    as match {
+      case Nil => z
+      case Cons(h, t) => foldLeft(t, f(z, h))(f)
+    }
+
+  def sum2(ns: List[Int]) =
+    foldRight(ns, 0) (_ + _)
+
+  def product2(ns: List[Double]) =
+    foldRight(ns, 1.0) ((x, y) => x * y)
+
+  def length2[A] (as: List[A]): Int =
+    foldRight(as, 0) ((_, n) => n + 1)
+
+  def sum3(ns: List[Int]) =
+    foldLeft(ns, 0)(_ + _)
+
+  def reverse[A](ns: List[A]): List[A] =
+    foldLeft(ns, List[A]()) ((acc, h) => Cons(h, acc))
+
+
   //可变参数,可以是一个或多个该类型的参数
   def apply[A] (as: A*): List[A] =
     if (as.isEmpty) Nil
@@ -68,11 +97,22 @@ object List {
 //    println(tail(a))
 //    println(setHead(a, 123))
 //    println(drop(a, 2))
-    println(dropWhile(a, (x: Int) => x < 4))
+//    println(dropWhile(a, (x: Int) => x < 4))
 
-    val b = List(4,6,6)
-    println(append(a, b))
-    println(init(a))
+//    val b = List(4,6,6)
+    val b = List(4.0,6.0,2.0)
+//    println(append(a, b))
+//    println(init(a))
+
+//    println(sum2(b))
+//    println(product2(b))
+
+//    println(foldRight(List(1,2,3,4,5), Nil:List[Int])(Cons(_,_)))
+
+//    println(length2(List(1,3,4,5)))
+//        println(sum3(a))
+
+    println(reverse(b))
 
   }
 }
