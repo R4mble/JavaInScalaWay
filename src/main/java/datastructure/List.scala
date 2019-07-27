@@ -89,6 +89,11 @@ object List {
     if (as.isEmpty) Nil
     else Cons(as.head, apply(as.tail: _*))
 
+  def addOne(ns: List[Int]): List[Int] = ns match {
+    case Nil => Nil
+    case Cons(t, Nil) => ns
+    case Cons(t, h) => addOne(Cons(t+1, h))
+  }
 
   def main(args: Array[String]): Unit = {
     val a = List(1,2,3,4,5)
@@ -112,7 +117,7 @@ object List {
 //    println(length2(List(1,3,4,5)))
 //        println(sum3(a))
 
-    println(reverse(b))
+    println(addOne(a))
 
   }
 }

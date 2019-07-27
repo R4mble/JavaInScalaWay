@@ -6,12 +6,14 @@ class Cafe {
     (cup, Charge(cc, cup.price))
   }
 
-  def buyCoffee(cc: CreditCard, n: Int): (List[Coffee], Charge) = {
-    val purchases: List[(Coffee, Charge)] = List.fill(n) (buyCoffee(cc))
+  def buyCoffee(cc: CreditCard, num: Int): (List[Coffee], Charge) = {
+    val purchases: List[(Coffee, Charge)] = List.fill(num) (buyCoffee(cc))
+    // 把Coffee和Charge作为元素的列表拆分为Coffee列表和Charge列表
     val (coffees, charges) = purchases.unzip
     (coffees, charges.reduce((c1, c2) => c1.combine(c2)))
   }
 
+  // 合并
   def coalesce(charges: List[Charge]): List[Charge] = {
     charges.groupBy(_.cc).values.map(_.reduce(_ combine _)).toList
   }
