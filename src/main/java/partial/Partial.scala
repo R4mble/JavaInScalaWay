@@ -1,5 +1,6 @@
 package partial
 
+// 函数式四连
 object Partial {
   def partial[A,B,C] (a: A, f: (A, B) => C): B => C =
     (b: B) => f(a, b)

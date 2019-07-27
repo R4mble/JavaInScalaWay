@@ -2,6 +2,7 @@ package factoria
 
 object Fac {
 
+  // 阶乘
   def factorial(n: Int): Int = {
     @annotation.tailrec
     def go(n: Int, acc: Int): Int =
@@ -14,9 +15,9 @@ object Fac {
   //done by myself, pretty cool
   def fib(n: Int): Int = {
     @annotation.tailrec
-    def go(f: Int, l: Int, n: Int): Int = {
-      if (n <= 0) l
-      else go(l, f + l, n - 1)
+    def go(prev: Int, cur: Int, n: Int): Int = {
+      if (n == 0) prev
+      else go(cur, prev + cur, n - 1)
     }
     go(0, 1, n)
   }
