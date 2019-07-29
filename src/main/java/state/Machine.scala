@@ -1,6 +1,6 @@
 package state
 
-import State._
+import state.State._
 
 /**
   * @author Wangyl
@@ -11,7 +11,7 @@ case object Coin extends Input
 case object Turn extends Input
 case class Machine(locked: Boolean, candies: Int, coins: Int)
 
-object candy {
+object Candy {
   type coins = Int
   type candies = Int
 
@@ -21,9 +21,9 @@ object candy {
       case (Coin, Machine(true, _, _)) => machine
       case (Turn, Machine(false, _, _)) => machine
       case (Coin, Machine(false, candy, coin)) =>
-          Machine(false, candy, coin + 1)
+          Machine(true, candy, coin + 1)
       case (Turn, Machine(true, candy, coin)) =>
-          Machine(true, candy - 1, coin)
+          Machine(false, candy - 1, coin)
     }
 
   /**
@@ -38,8 +38,13 @@ object candy {
 
 object test extends App {
   val m = Machine(false, 10, 4)
-  val s = candy.simulateMachine(List(Coin, Turn))
-//  val s1 = candy.update(Coin)(m)
-//  println(s1)
+  val s0 = Candy.simulateMachine(List(Coin, Turn,Coin, Turn,Coin, Turn)).run(m)
+  println(s0)
+
+  val s= Candy.simulateMachine(List(Coin, Turn, Turn, Turn, Coin, Coin, Turn, Coin, Coin, Turn)).run(Machine(false, 5, 5))
+  println(s)
+
+  val s1 = State.get.flatMap((_: Int) => State((s: Int) => (s, s))).run(5)
+  println(s1)
 }
 

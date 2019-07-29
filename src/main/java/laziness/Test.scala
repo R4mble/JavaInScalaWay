@@ -43,6 +43,4 @@ object Test extends App{
 //
 //  println(Stream(1,2,3).zip(Stream(4,5,6)).toList)
 
-  println(Stream.unfold(false))
-
 }

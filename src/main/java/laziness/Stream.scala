@@ -145,7 +145,6 @@ object Stream {
 
   def empty[A]: Stream[A] = Empty
 
-<<<<<<< HEAD
   //  def constant[A] (a: A): Stream[A] =
 //    cons(a, constant(a))
 
@@ -203,11 +202,5 @@ object Stream {
   // 可变参方法
   def apply[A] (as: A*): Stream[A] =
     if (as.isEmpty) empty else cons(as.head, apply(as.tail: _*))
-
-=======
-  // 可变参方法
-  def apply[A] (as: A*): Stream[A] =
-    if (as.isEmpty) empty else cons(as.head, apply(as.tail: _*))
->>>>>>> ab37030279d142becbe6fb5fad36cd5999fd9cba
 }
 
