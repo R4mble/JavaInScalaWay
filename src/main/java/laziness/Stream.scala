@@ -28,6 +28,7 @@ trait Stream[+A] {
     case _ => this
   }
 
+  // 从起始元素连续满足
   def takeWhile(p: A => Boolean): Stream[A] = this match {
     case Cons(h, t) if p(h()) => cons(h(), t() takeWhile p)
     case _ => empty
@@ -144,6 +145,7 @@ object Stream {
 
   def empty[A]: Stream[A] = Empty
 
+<<<<<<< HEAD
   //  def constant[A] (a: A): Stream[A] =
 //    cons(a, constant(a))
 
@@ -202,5 +204,10 @@ object Stream {
   def apply[A] (as: A*): Stream[A] =
     if (as.isEmpty) empty else cons(as.head, apply(as.tail: _*))
 
+=======
+  // 可变参方法
+  def apply[A] (as: A*): Stream[A] =
+    if (as.isEmpty) empty else cons(as.head, apply(as.tail: _*))
+>>>>>>> ab37030279d142becbe6fb5fad36cd5999fd9cba
 }
 
